@@ -1,0 +1,105 @@
+<!-- <ng-container *ngIf="(store.state$ | async).basicInfo as basicInfo"> -->
+<mdb-card>
+  <mdb-card-header>About Me</mdb-card-header>
+  <mdb-card-body>
+    <!-- Extended material form grid -->
+    <form [formGroup]="aboutForm" (ngSubmit)="updateProfile()" ngxsForm="settings.aboutForm">
+      <!-- Grid row -->
+      <div class="form-row">
+        <!-- Grid column -->
+        <div class="col-md-6">
+          <!-- Material input -->
+          <div class="md-form form-group">
+            <input
+              mdbInputDirective
+              type="text"
+              class="form-control"
+              id="inputEmail4MD"
+              formControlName="occupation"
+              [validateSuccess]="false"
+            />
+            <label for="inputEmail4MD">Occupation</label>
+          </div>
+        </div>
+      </div>
+      <!-- Grid column -->
+
+      <!-- ================================================================= -->
+      <!-- ! STATUS -->
+      <!-- ================================================================= -->
+      <div class="form-row">
+        <p style="color: #757575;">Status:&nbsp;&nbsp;&nbsp;</p>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="defaultInline1"
+            name="status"
+            mdbInputDirective
+            [validateSuccess]="false"
+            formControlName="status"
+            value="Single"
+          />
+          <label class="custom-control-label" for="defaultInline1">Single</label>
+        </div>
+
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="defaultInline2"
+            name="status"
+            mdbInputDirective
+            [validateSuccess]="false"
+            formControlName="status"
+            value="Realtionship"
+          />
+          <label class="custom-control-label" for="defaultInline2">Realtionship</label>
+        </div>
+
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="defaultInline3"
+            name="status"
+            mdbInputDirective
+            [validateSuccess]="false"
+            formControlName="status"
+            value="Married"
+          />
+          <label class="custom-control-label" for="defaultInline3">Married</label>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- ! TEXT AREA -->
+      <!-- ================================================================= --><!-- Grid row -->
+      <div class="form-row">
+        <!-- Grid column -->
+        <div class="col">
+          <!-- Material input -->
+          <div class="md-form form-group">
+            <textarea
+              mdbInputDirective
+              type="text"
+              class="md-textarea md-textarea-auto form-control"
+              id="textarea"
+              formControlName="about"
+              [validateSuccess]="false"
+            ></textarea>
+            <label for="textarea">Tell us about yourself</label>
+          </div>
+        </div>
+      </div>
+      <!-- Grid column -->
+
+      <button type="submit" class="btn btn-primary btn-md">Update Profile</button>
+    </form>
+    <!-- Extended material form grid -->
+  </mdb-card-body>
+</mdb-card>
+<!-- </ng-container> -->
+
+<!-- <p>{{ aboutForm.value | json }}</p>
+<p>{{ store.state$ | async | json }}</p> -->

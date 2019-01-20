@@ -1,0 +1,238 @@
+<mdb-card>
+  <mdb-card-header>Event Details</mdb-card-header>
+
+  <mdb-card-body>
+    <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" ngxsForm="events.manageForm">
+      <!-- ! TITLE -->
+      <div class="form-row">
+        <!-- Grid column -->
+        <div class="col">
+          <!-- Material input -->
+          <div class="md-form form-group">
+            <input
+              mdbInputDirective
+              type="text"
+              class="form-control"
+              id="titleField"
+              formControlName="title"
+              [validateSuccess]="false"
+              data-error="The event title is required"
+            />
+            <label for="titleField">Give your event a name</label>
+          </div>
+        </div>
+      </div>
+      <!-- Grid column -->
+
+      <!-- ! CATEGORY -->
+      <!-- ================================================================= -->
+      <p style="color: #757575;">Category:&nbsp;&nbsp;&nbsp;</p>
+      <div class="form-row">
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="defaultInline1"
+            name="category"
+            mdbInputDirective
+            [validateSuccess]="false"
+            formControlName="category"
+            value="Drinks"
+          />
+          <label class="custom-control-label" for="defaultInline1">Drinks</label>
+        </div>
+
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="defaultInline2"
+            name="category"
+            mdbInputDirective
+            [validateSuccess]="false"
+            formControlName="category"
+            value="Culture"
+          />
+          <label class="custom-control-label" for="defaultInline2">Culture</label>
+        </div>
+
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="defaultInline3"
+            name="category"
+            mdbInputDirective
+            [validateSuccess]="false"
+            formControlName="category"
+            value="Film"
+          />
+          <label class="custom-control-label" for="defaultInline3">Film</label>
+        </div>
+
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="defaultInline6"
+            name="category"
+            mdbInputDirective
+            [validateSuccess]="false"
+            formControlName="category"
+            value="Food"
+          />
+          <label class="custom-control-label" for="defaultInline6">Food</label>
+        </div>
+
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="defaultInline4"
+            name="category"
+            mdbInputDirective
+            [validateSuccess]="false"
+            formControlName="category"
+            value="Travel"
+          />
+          <label class="custom-control-label" for="defaultInline4">Travel</label>
+        </div>
+
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="defaultInline5"
+            name="category"
+            mdbInputDirective
+            [validateSuccess]="false"
+            formControlName="category"
+            value="Music"
+          />
+          <label class="custom-control-label" for="defaultInline5">Music</label>
+        </div>
+      </div>
+
+      <!-- ! DESCRIPTION -->
+      <!-- Grid row -->
+      <div class="form-row">
+        <!-- Grid column -->
+        <div class="col">
+          <div class="md-form form-group">
+            <textarea
+              mdbInputDirective
+              type="text"
+              class="md-textarea md-textarea-auto form-control"
+              id="descriptionField"
+              formControlName="description"
+              [validateSuccess]="false"
+              data-error="Please enter a description with min 10 characters"
+            ></textarea>
+            <label for="descriptionField">Tell us about your event</label>
+          </div>
+        </div>
+      </div>
+      <!-- Grid column -->
+
+      <!-- ? CITY -->
+      <!-- Grid row -->
+      <div class="form-row">
+        <!-- Grid column -->
+        <div class="col">
+          <!-- Material input -->
+          <div class="md-form form-group">
+            <input
+              mdbInputDirective
+              type="text"
+              class="form-control"
+              id="inputCityMD"
+              ngx-google-places-autocomplete
+              #placesRef="ngx-places"
+              [options]="optionsCity"
+              (onAddressChange)="handleAddressChange($event)"
+              placeholder="City"
+              formControlName="city"
+              [validateSuccess]="false"
+              data-error="Please enter the city"
+            />
+            <!-- <label for="inputCityMD">City</label> -->
+            <!-- <input ngx-google-places-autocomplete #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ? VENUE -->
+      <!-- Grid column -->
+      <div class="form-row">
+        <div class="col-12">
+          <div class="md-form form-group">
+            <input
+              mdbInputDirective
+              type="text"
+              class="form-control"
+              id="inputVenueMD"
+              formControlName="venue"
+              [validateSuccess]="false"
+              placeholder="Venue"
+              ngx-google-places-autocomplete
+              #venueRef="ngx-places"
+              [options]="optionsVenue"
+              (onAddressChange)="handleVenueChange($event)"
+              data-error="Please enter the venue"
+            />
+            <!-- <label for="inputVenueMD">Country</label> -->
+          </div>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+
+      <!-- ======================================================================= -->
+      <!-- ! DATE OF BIRTH -->
+      <!-- ======================================================================= -->
+      <!-- Grid column -->
+      <div class="form-row d-flex justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-6">
+          <!-- Material input -->
+          <div class="md-form form-group">
+            <input
+              mdbInputDirective
+              bsDatepicker
+              type="text"
+              class="form-control"
+              id="inputDate4MD"
+              formControlName="date"
+              [validateSuccess]="false"
+              [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-blue' }"
+              [bsValue]="bsValue"
+              placement="top"
+            />
+            <label for="inputDate4MD">Event Date</label>
+          </div>
+        </div>
+        <!-- </div> -->
+
+        <!-- ? TIMEPICKER -->
+      <!-- <div class="form-row"> -->
+        <div class="col-sm-12 col-md-6 pt-2">
+          <!-- Material input -->
+          <div class="md-form form-group">
+            <timepicker [showMeridian]="false" [minuteStep]="10"
+            formControlName="time"
+            class="timepicker"></timepicker>
+            <!-- <label for="inputDate4MD">Event Date</label> -->
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-md" [disabled]="!eventForm.valid">
+        Update Event
+      </button>
+      <button type="button" (click)="onCancel()" class="btn btn-secondary btn-md">Cancel</button>
+    </form>
+  </mdb-card-body>
+</mdb-card>
+
+<p class="mt-2">{{ eventForm.value | json }}</p>
+
+<!-- [disabled]="!eventForm.valid" -->

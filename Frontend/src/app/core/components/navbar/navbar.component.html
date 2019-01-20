@@ -1,0 +1,283 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-sm navbar-dark blue">
+  <!-- Navbar brand -->
+  <mdb-navbar-brand
+    ><a class="navbar-brand" [routerLink]="['/']">NgEvents</a></mdb-navbar-brand
+  >
+
+  <links>
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" id="navbaritem1" routerLinkActive="active">
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/events']">Events</a>
+      </li>
+      <ng-container *ngIf="(currentUser$ | async).token">
+        <li class="nav-item" id="navbaritem2">
+          <a class="nav-link waves-light" mdbWavesEffect>People</a>
+        </li>
+        <li class="nav-item" id="navbaritem3">
+          <button type="button" size="sm" mdbBtn color="success" mdbWavesEffect [routerLink]="[ '/events/create']">
+            Create Event
+          </button>
+        </li>
+      </ng-container>
+    </ul>
+
+    <!-- ! LOGIN/REGISTER -->
+    <ng-container *ngIf="!(currentUser$ | async).token">
+      <ul class="navbar-nav nav-flex-icons">
+        <li class="nav-item" id="navbaritem1">
+          <button
+            type="button"
+            size="sm"
+            mdbBtn
+            color="info"
+            mdbWavesEffect
+            data-toggle="modal"
+            data-target="#basicExample"
+            (click)="loginModal.show()"
+          >
+          <i class="fa fa-sign-in"></i>
+          &nbsp;Sign In
+        </button>
+      </li>
+      <li class="nav-item" id="navbaritem2">
+        <button
+        type="button"
+        size="sm"
+        mdbBtn
+        color="secondary"
+        mdbWavesEffect
+        data-toggle="modal"
+        data-target="#basicExample"
+        (click)="registerModal.show()"
+        >
+        <i class="fa fa-user-plus"></i>
+            &nbsp;Sign Up
+          </button>
+        </li>
+      </ul>
+    </ng-container>
+    <!-- ? LOGIN/REGISTER -->
+
+    <!-- ! USER -->
+    <ng-container *ngIf="(currentUser$ | async).token">
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item avatar dropdown ml-auto" dropdown>
+            <a
+              dropdownToggle
+              mdbWavesEffect
+              type="button"
+              class="nav-link dropdown-toggle waves-light"
+              id="avatar"
+              >{{ (currentUser$ | async).username | titlecase }}&nbsp;&nbsp;
+              <img
+                src="{{ (currentUser$ | async).mainPhotoUrl }}"
+                class="img-fluid rounded-circle z-depth-0" alt=""/><span class="caret"></span
+            ></a>
+            <div
+              *dropdownMenu
+              class="dropdown-menu dropdown-menu-right dropdown dropdown-primary"
+              role="menu"
+            >
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;My Profile</a>
+              <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/settings/basic']"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Settings</a>
+              <div class="divider dropdown-divider"></div>
+              <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()"
+                ><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;Sign Out</a
+              >
+            </div>
+          </li>
+        </ul>
+      </ng-container>
+
+  </links>
+  <!-- Links -->
+</mdb-navbar>
+<!--/.Navbar-->
+
+<!-- ! LOGIN MODAL -->
+<div
+  mdbModal
+  #loginModal="mdbModal"
+  class="modal fade top"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="loginModal.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="login()" style="min-width: 350px;">
+        <!-- ! EMAIL -->
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <i class="fa fa-envelope prefix grey-text"></i>
+            <input
+              type="email"
+              id="loginForm-email"
+              formControlName="email"
+              class="form-control"
+              mdbInputDirective
+              data-error="This email is not valid"
+              [validateSuccess]="false"
+            />
+            <label for="loginForm-email">Your email</label>
+          </div>
+
+          <!-- ! PASSWORD -->
+          <div class="md-form mb-4">
+            <i class="fa fa-lock prefix grey-text"></i>
+            <input
+              type="password"
+              id="loginForm-pass"
+              formControlName="password"
+              class="form-control"
+              mdbInputDirective
+              data-error="Please enter your password"
+              [validateSuccess]="false"
+            />
+            <label for="loginForm-pass">Your password</label>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button
+            mdbBtn
+            color="default"
+            class="waves-light"
+            mdbWavesEffect
+            [disabled]="!loginForm.valid"
+          >
+            <i [ngClass]="(isLoading$ | async) ? 'fa fa-spinner fa-spin fa-fw' : 'fa fa-sign-in'"></i>
+            &nbsp;&nbsp;Sign in
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ! REGISTER MODAL -->
+<div
+  mdbModal
+  #registerModal="mdbModal"
+  class="modal fade top"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="registerModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="registerModal.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="register()" style="min-width: 350px;">
+        <!-- ! USERNAME -->
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <i class="fa fa-user prefix grey-text"></i>
+            <input
+              type="text"
+              id="registerForm-username"
+              formControlName="username"
+              class="form-control"
+              mdbInputDirective
+              data-error="Please enter username"
+              [validateSuccess]="false"
+            />
+            <label for="registerForm-username">Username</label>
+          </div>
+
+          <!-- ! EMAIL -->
+          <div class="md-form mb-5">
+            <i class="fa fa-envelope prefix grey-text"></i>
+            <input
+              type="email"
+              id="registerForm-email"
+              formControlName="email"
+              class="form-control"
+              mdbInputDirective
+              data-error="This email is not valid"
+              [validateSuccess]="false"
+            />
+            <label for="registerForm-email">Your email</label>
+          </div>
+
+          <!-- ! PASSWORD -->
+          <div class="md-form mb-5">
+            <i class="fa fa-lock prefix grey-text"></i>
+            <input
+              type="password"
+              id="registerForm-pass"
+              formControlName="password"
+              class="form-control"
+              mdbInputDirective
+              data-error="Please enter your password"
+              [validateSuccess]="false"
+            />
+            <label for="registerForm-pass">Your password</label>
+          </div>
+
+          <!-- ! CONFIRM PASSWORD -->
+          <div class="md-form mb-4">
+            <i class="fa fa-lock prefix grey-text"></i>
+            <input
+              type="password"
+              id="registerForm-confirmPassword"
+              formControlName="confirmPassword"
+              class="form-control"
+              mdbInputDirective
+              data-error="Passwords don't match"
+              [validateSuccess]="false"
+            />
+            <label for="registerForm-confirmPassword">Confirm your password</label>
+          </div>
+        </div>
+
+        <div class="modal-footer d-flex justify-content-center">
+          <button
+            mdbBtn
+            color="default"
+            class="waves-light"
+            mdbWavesEffect
+            [disabled]="!registerForm.valid"
+          >
+          <i [ngClass]="(isLoading$ | async) ? 'fa fa-spinner fa-spin fa-fw' : 'fa fa-user-plus'"></i>
+          &nbsp;&nbsp;
+            Sign up
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<ng-template *ngIf="(isLoading$ | async)">
+  <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+</ng-template>
+<!-- <p>{{ (currentUser$ | async).token | json }}</p> -->

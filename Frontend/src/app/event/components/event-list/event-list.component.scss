@@ -1,0 +1,30 @@
+.img-thumb-lg {
+  height: auto !important;
+  width: 65px !important;
+  border-radius: 50%;
+}
+
+.event-title {
+  font-weight: 500;
+  font-size: 1.05em;
+  margin-bottom: 6px;
+  color: black;
+
+  &:hover {
+    color: #2196f3;
+  }
+}
+
+.attendees {
+  border-top: 1px solid #22242626;
+  padding-top: 10px;
+}
+
+.img35 {
+  height: auto !important;
+  width: 40px !important;
+}
+
+.event-date {
+  font-size: 15px;
+}

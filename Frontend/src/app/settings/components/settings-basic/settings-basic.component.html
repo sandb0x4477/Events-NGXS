@@ -1,0 +1,138 @@
+<!-- <ng-container *ngIf="(store.state$ | async).basicInfo as basicInfo"> -->
+  <mdb-card>
+    <mdb-card-header>Basics</mdb-card-header>
+    <mdb-card-body>
+      <!-- Extended material form grid -->
+    <form [formGroup]="basicForm" (ngSubmit)="updateProfile()"  ngxsForm="settings.basicForm">
+      <!-- Grid row -->
+      <div class="form-row">
+        <!-- Grid column -->
+        <div class="col-md-6">
+          <!-- Material input -->
+          <div class="md-form form-group">
+            <input
+              mdbInputDirective
+              type="text"
+              class="form-control"
+              id="inputEmail4MD"
+              formControlName="fullName"
+              [validateSuccess]="false"
+              />
+              <label for="inputEmail4MD">Full name</label>
+          </div>
+        </div>
+        <!-- Grid column -->
+
+        <!-- ======================================================================= -->
+        <!-- ! DATE OF BIRTH -->
+        <!-- ======================================================================= -->
+        <!-- Grid column -->
+        <div class="col-md-6">
+          <!-- Material input -->
+          <div class="md-form form-group">
+            <input
+            mdbInputDirective
+              bsDatepicker
+              type="text"
+              class="form-control"
+              id="inputDoB4MD"
+              formControlName="dateOfBirth"
+              [validateSuccess]="false"
+              [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-blue' }"
+              [bsValue]="bsValue"
+
+              />
+              <label for="inputDoB4MD">Date of birth</label>
+          </div>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+
+      <!-- ================================================================= -->
+      <!-- ! GENDER -->
+      <!-- ================================================================= -->
+      <div class="form-row">
+        <p style="color: #757575;">Gender:&nbsp;&nbsp;&nbsp;</p>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+          type="radio"
+          class="custom-control-input"
+          id="defaultInline1"
+          name="gender"
+          mdbInputDirective
+          [validateSuccess]="false"
+          formControlName="gender"
+          value="male"
+          />
+          <label class="custom-control-label" for="defaultInline1">Male</label>
+        </div>
+
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="defaultInline2"
+            name="gender"
+            mdbInputDirective
+            [validateSuccess]="false"
+            formControlName="gender"
+            value="female"
+            />
+            <label class="custom-control-label" for="defaultInline2">Female</label>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- ! CITY -->
+      <!-- ================================================================= -->
+      <!-- Grid row -->
+      <div class="form-row">
+        <!-- Grid column -->
+        <div class="col-md-6">
+          <!-- Material input -->
+          <div class="md-form form-group">
+            <input
+              mdbInputDirective
+              type="text"
+              class="form-control"
+              id="inputCityMD"
+              ngx-google-places-autocomplete
+              #placesRef="ngx-places"
+              [options]="options"
+              (onAddressChange)="handleAddressChange($event)"
+              placeholder="City"
+              formControlName="city"
+              [validateSuccess]="false"
+              />
+              <!-- <label for="inputCityMD">City</label> -->
+              <!-- <input ngx-google-places-autocomplete #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/> -->
+            </div>
+          </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6">
+          <!-- Material input -->
+          <div class="md-form form-group">
+            <input
+              mdbInputDirective
+              type="text"
+              class="form-control"
+              id="inputCountryMD"
+              formControlName="country"
+              [validateSuccess]="false"
+              [attr.disabled]="true"
+              />
+              <label for="inputCountryMD">Country</label>
+          </div>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+      <button type="submit" class="btn btn-primary btn-md">Update Profile</button>
+    </form>
+    <!-- Extended material form grid -->
+  </mdb-card-body>
+</mdb-card>
+<!-- </ng-container> -->

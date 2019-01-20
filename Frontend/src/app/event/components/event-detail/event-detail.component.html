@@ -1,0 +1,138 @@
+<div class="row">
+  <div class="col-md-4 d-none d-sm-none d-md-block ">
+    <mdb-card>
+      <mdb-card-header>Users</mdb-card-header>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <img
+            src="{{ eventHost[0].photoUrl }}"
+            alt=""
+            class="mr-2 mt-2 rounded-circle img35"
+          />&nbsp;&nbsp;{{ eventHost[0].userName | titlecase }}&nbsp;&nbsp;<mdb-badge
+            color="indigo"
+            >Host</mdb-badge
+          >
+        </li>
+
+        <ng-container *ngFor="let eventUser of eventUsers">
+          <li class="list-group-item">
+            <img
+              src="{{ eventUser.photoUrl }}"
+              alt=""
+              class="mr-2 mt-2 rounded-circle img35"
+            />&nbsp;&nbsp;{{ eventUser.userName | titlecase }}
+          </li>
+        </ng-container>
+      </ul>
+    </mdb-card>
+  </div>
+
+  <div class="col-md-8 col-sm-12">
+    <mdb-card class="mb-3">
+      <mdb-card-header>
+        <h5>
+          <strong>{{ event.title }}</strong>
+        </h5>
+      </mdb-card-header>
+
+      <!--Card image-->
+      <mdb-card-img
+        src="assets/categoryImages/{{ event.category }}.jpg"
+        alt="Card image cap"
+      ></mdb-card-img>
+
+      <!--Card content-->
+      <mdb-card-body>
+        <!--Title-->
+        <mdb-card-title>
+          <ng-container *ngFor="let eventUser of event.eventUsers">
+            <div class="row" *ngIf="eventUser.isHost">
+              <div class="col">
+                <h5>Hosted by {{ eventUser.userName | titlecase }}</h5>
+              </div>
+              <button
+                mdbBtn
+                color="secondary"
+                size="sm"
+                mdbWavesEffect
+                class="mr-2"
+                *ngIf="isHost"
+                [routerLink]="['/events', event.id, 'manage']"
+              >
+                Manage Event
+              </button>
+              <button
+                mdbBtn
+                color="secondary"
+                size="sm"
+                mdbWavesEffect
+                class="mr-2"
+                *ngIf="isGoing"
+                (click)="cancelMyPlace(event.id)"
+              >
+                Cancel My Place
+              </button>
+              <button
+                (click)="joinThisEvent(event.id)"
+                mdbBtn
+                color="secondary"
+                size="sm"
+                mdbWavesEffect
+                class="mr-2"
+                *ngIf="!isGoing && !isHost"
+              >
+                Join This Event
+              </button>
+            </div>
+          </ng-container>
+        </mdb-card-title>
+      </mdb-card-body>
+    </mdb-card>
+
+    <mdb-card class="mb-3">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          &nbsp;<i class="fa fa-info" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{
+            event.description
+          }}
+        </li>
+        <li class="list-group-item">
+          <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;{{
+            event.date | date: 'EEE, dd of LLL, HH:mm (z)'
+          }}
+        </li>
+        <li class="list-group-item">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{
+            event.venue
+          }}
+        </li>
+        <li class="list-group-item">
+          <div class="waves-input-wrapper waves-light" mdbWavesEffect>
+            <input
+              mdbBtn
+              color="info"
+              type="button"
+              size="sm"
+              block="true"
+              [value]="showMap ? 'Hide map' : 'Show Map'"
+              (click)="showMapToggle()"
+            />
+          </div>
+        </li>
+      </ul>
+    </mdb-card>
+
+    <mdb-card class="mb-3" *ngIf="showMap">
+      <agm-map
+        [latitude]="event.venueLat"
+        [longitude]="event.venueLng"
+        [zoom]="zoom"
+        style="height: 300px"
+      >
+        <agm-marker [latitude]="event.venueLat" [longitude]="event.venueLng"></agm-marker>
+      </agm-map>
+    </mdb-card>
+
+    <!-- <p>{{ event | json }}</p> -->
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div *ngFor="let event of events">
+  <mdb-card class="mb-3">
+    <mdb-card-header>
+      <ng-container *ngFor="let eventUser of event.eventUsers">
+        <div class="row" *ngIf="eventUser.isHost">
+          <div class="col-2 mr-1">
+            <img
+              *ngIf="eventUser.isHost"
+              src="{{ eventUser.photoUrl }}"
+              alt=""
+              class="img-thumb-lg"
+            />
+          </div>
+          <div class="col">
+            <a [routerLink]="[ '/events', event.id]">
+              <p class="event-title">{{ event.title }}</p>
+            </a>
+            <p>
+              Hosted by
+              <a href="" class="card-link"> {{ eventUser.userName | titlecase }}</a>
+            </p>
+          </div>
+        </div>
+      </ng-container>
+    </mdb-card-header>
+    <mdb-card-body>
+
+        <p class="event-date"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;
+        {{ event.date | date: 'EEE, dd of LLL, HH:mm (z)' }}</p>
+        <p class="event-date"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{ event.venue }}</p>
+
+
+      <div class="attendees mt-1 d-flex flex-row">
+          <ng-container *ngFor="let eventUser of event.eventUsers">
+            <ng-container *ngIf="eventUser.isHost">
+              <div>
+                <a href=""
+                  ><img
+                    src="{{ eventUser.photoUrl }}"
+                    alt=""
+                    class="mr-2 mt-2 rounded-circle img35"
+                /></a>
+              </div>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngFor="let eventUser of event.eventUsers">
+            <ng-container *ngIf="!eventUser.isHost">
+              <div>
+                <a href=""
+                  ><img
+                    src="{{ eventUser.photoUrl }}"
+                    alt=""
+                    class="mr-2 mt-2 rounded-circle img35"
+                /></a>
+              </div>
+            </ng-container>
+          </ng-container>
+      </div>
+    </mdb-card-body>
+    <mdb-card-footer class="text-muted">
+      <div class="row justify-content-start align-items-center">
+        <div class="col mr-auto">{{ event.description }}</div>
+        <div class="col text-right"><button mdbBtn type="button" color="primary" size="sm" mdbWavesEffect [routerLink]="[ '/events', event.id]">View</button></div>
+      </div>
+    </mdb-card-footer>
+  </mdb-card>
+</div>
