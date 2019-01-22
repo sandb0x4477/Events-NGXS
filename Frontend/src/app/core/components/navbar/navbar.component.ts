@@ -124,4 +124,9 @@ export class NavbarComponent implements OnInit {
       },
     );
   }
+
+  get userId() {
+    const user = JSON.parse(localStorage.getItem('auth.currentUser'));
+    return user.id;
+  }
 }

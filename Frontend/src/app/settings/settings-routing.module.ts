@@ -5,6 +5,7 @@ import { SettingsPageComponent } from './containers/settingsPage/settingsPage.co
 import { SettingsBasicComponent } from './components/settings-basic/settings-basic.component';
 import { SettingsAboutComponent } from './components/settings-about/settings-about.component';
 import { SettingsPhotosComponent } from './components/settings-photos/settings-photos.component';
+import { UserProfilePageComponent } from './containers/user-profile-page/user-profile-page.component';
 
 const routes: Routes = [
   { path: '', component: SettingsPageComponent,
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: 'photos', component: SettingsPhotosComponent },
     ]
   },
+  {path: 'user/:userId', component: UserProfilePageComponent}
 
 ];
 

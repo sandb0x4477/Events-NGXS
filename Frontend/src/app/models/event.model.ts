@@ -9,6 +9,7 @@ export interface Event {
   venueLng: number;
   isCancelled: boolean;
   date: Date;
+  time: Date;
   created: string;
   eventUsers: EventUser[];
 }

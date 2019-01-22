@@ -82,7 +82,7 @@ export class EventManageComponent implements OnInit {
       venueLng: [0],
       isCancelled: [false],
       date: ['', Validators.required],
-      time: [new Date(2019, 5, 24, 18, 30)],
+      time: [null],
     });
   }
 

@@ -17,7 +17,7 @@
             </a>
             <p>
               Hosted by
-              <a href="" class="card-link"> {{ eventUser.userName | titlecase }}</a>
+              <a [routerLink]="['/settings/user', eventUser.userId]" class="card-link"> {{ eventUser.userName | titlecase }}</a>
             </p>
           </div>
         </div>
@@ -34,7 +34,7 @@
           <ng-container *ngFor="let eventUser of event.eventUsers">
             <ng-container *ngIf="eventUser.isHost">
               <div>
-                <a href=""
+                <a [routerLink]="['/settings/user', eventUser.userId]"
                   ><img
                     src="{{ eventUser.photoUrl }}"
                     alt=""
@@ -46,7 +46,7 @@
           <ng-container *ngFor="let eventUser of event.eventUsers">
             <ng-container *ngIf="!eventUser.isHost">
               <div>
-                <a href=""
+                <a [routerLink]="['/settings/user', eventUser.userId]"
                   ><img
                     src="{{ eventUser.photoUrl }}"
                     alt=""

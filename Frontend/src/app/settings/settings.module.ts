@@ -20,6 +20,8 @@ import { SettingsBasicComponent } from './components/settings-basic/settings-bas
 import { SettingsMenuComponent } from './components/settings-menu/settings-menu.component';
 import { SettingsAboutComponent } from './components/settings-about/settings-about.component';
 import { SettingsPhotosComponent } from './components/settings-photos/settings-photos.component';
+import { UserProfilePageComponent } from './containers/user-profile-page/user-profile-page.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 export const COMPONENTS = [
   SettingsPageComponent,
@@ -27,7 +29,9 @@ export const COMPONENTS = [
   SettingsBasicComponent,
   SettingsMenuComponent,
   SettingsAboutComponent,
-  SettingsPhotosComponent
+  SettingsPhotosComponent,
+  UserProfilePageComponent,
+  UserProfileComponent
 ];
 
 @NgModule({

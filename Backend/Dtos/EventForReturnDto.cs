@@ -16,6 +16,7 @@ namespace Backend.Dtos
     public double VenueLat { get; set; }
     public double VenueLng { get; set; }
     public bool IsCancelled { get; set; }
+    public DateTime Time { get; set; }
     public DateTime Date { get; set; }
     public DateTime Created { get; set; }
     public ICollection<Attendee> EventUsers { get; set; }

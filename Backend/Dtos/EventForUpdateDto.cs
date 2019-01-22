@@ -13,5 +13,6 @@ namespace Backend.Dtos
     public double VenueLat { get; set; }
     public double VenueLng { get; set; }
     public DateTime Date { get; set; }
+    public DateTime Time { get; set; }
   }
 }

@@ -1,0 +1,24 @@
+<mdb-card class="mb-3">
+  <mdb-card-header> User Profile </mdb-card-header>
+  <mdb-card-body class="d-flex flex-row justify-content-start align-items-end">
+    <div class="mr-4">
+      <img class="rounded-circle" src="{{ mainPhoto }}" alt="Card image cap" />
+    </div>
+
+    <div class="mr-auto">
+      <h4>{{ userInfo.fullName }}</h4>
+      <h5>{{ userInfo.occupation }}</h5>
+      <h5>Lives in {{ userInfo.city }}, {{ userInfo.country }}</h5>
+      <h5>Born {{ userInfo.dateOfBirth | date: 'dd-MM-yyyy' }}</h5>
+    </div>
+  </mdb-card-body>
+</mdb-card>
+
+<mdb-card class="mb-3">
+  <mdb-card-header> Photos </mdb-card-header>
+  <mdb-card-body class="d-flex flex-wrap justify-content-start align-items-end">
+    <div class="mr-4" *ngFor="let photo of userPhotos">
+      <img class="mb-2" src="{{ photo.photoUrl }}" alt="Card image cap" />
+    </div>
+  </mdb-card-body>
+</mdb-card>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { Login } from '../../state/auth.actions';
 
 @Component({
   selector: 'app-home',
@@ -7,15 +9,11 @@ import { Component, OnInit } from '@angular/core';
   <header class="jumbotron my-4 align-items-center">
     <h4 class="display-5">Join our Events Comunity!</h4>
     <br>
-    <button class="btn btn-primary mr-3" [routerLink]="['/register']"
-      >Register for free!!!!</button
-    >
+    <button class="btn btn-primary mr-3" [routerLink]="['/events']"
+      >Enter</button>
     <button class="btn btn-secondary mr-3" (click)="login()"
-      >...Login as User1</button
-    >
-    <button class="btn btn-info " (click)="login()"
-      >...or Enter The Site</button
-    >
+      >...or Login as User1 for testing</button>
+
   </header>
   `,
   styles: [
@@ -30,9 +28,11 @@ import { Component, OnInit } from '@angular/core';
   ],
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
+  constructor(private store: Store) {}
 
   ngOnInit() {}
 
-  login() {}
+  login() {
+    this.store.dispatch(new Login({email: 'user1@test.com', password: 'password'}));
+  }
 }

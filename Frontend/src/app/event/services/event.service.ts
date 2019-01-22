@@ -18,13 +18,13 @@ export class EventService {
   }
 
   getEventDetail(payload: any): Observable<Event> {
-    return this.http.get<Event>(this.apiURL + payload);
-    // .pipe(
-    //   mergeMap((response: Event) => {
-    //     console.log('response:', response);
-    //     return of(response);
-    //   }),
-    // );
+    return this.http.get<Event>(this.apiURL + payload)
+    .pipe(
+      mergeMap((response: Event) => {
+        console.log('response:', response);
+        return of(response);
+      }),
+    );
   }
 
   createEvent(payload: any): Observable<any> {

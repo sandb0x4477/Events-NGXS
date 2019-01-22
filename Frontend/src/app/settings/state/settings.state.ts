@@ -69,7 +69,7 @@ export class SettingsState {
     patchState({ loading: true });
     return this.settingsService.getUserInfo(payload).pipe(
       tap((result: UserInfo) => {
-        // console.log('result:', result);
+        console.log('userInfo:', result);
         const basicFormResponse = {
           fullName: result.fullName,
           dateOfBirth: result.dateOfBirth,

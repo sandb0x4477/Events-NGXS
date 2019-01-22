@@ -3,18 +3,22 @@
     <mdb-card>
       <mdb-card-header>Users</mdb-card-header>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <img
+        <a [routerLink]="['/settings/user', eventHost[0].userId]">
+
+          <li class="list-group-item">
+            <img
             src="{{ eventHost[0].photoUrl }}"
             alt=""
             class="mr-2 mt-2 rounded-circle img35"
-          />&nbsp;&nbsp;{{ eventHost[0].userName | titlecase }}&nbsp;&nbsp;<mdb-badge
+            />&nbsp;&nbsp;{{ eventHost[0].userName | titlecase }}&nbsp;&nbsp;<mdb-badge
             color="indigo"
             >Host</mdb-badge
-          >
-        </li>
+            >
+          </li>
+        </a>
 
         <ng-container *ngFor="let eventUser of eventUsers">
+        <a [routerLink]="['/settings/user', eventUser.userId]">
           <li class="list-group-item">
             <img
               src="{{ eventUser.photoUrl }}"
@@ -22,6 +26,7 @@
               class="mr-2 mt-2 rounded-circle img35"
             />&nbsp;&nbsp;{{ eventUser.userName | titlecase }}
           </li>
+          </a>
         </ng-container>
       </ul>
     </mdb-card>

@@ -80,7 +80,7 @@
               class="dropdown-menu dropdown-menu-right dropdown dropdown-primary"
               role="menu"
             >
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;My Profile</a>
+              <a class="dropdown-item waves-light" mdbWavesEffect  [routerLink]="['/settings/user', userId]"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;My Profile</a>
               <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/settings/basic']"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Settings</a>
               <div class="divider dropdown-divider"></div>
               <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()"

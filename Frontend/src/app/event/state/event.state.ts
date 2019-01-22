@@ -88,6 +88,7 @@ export class EventState {
           venueLng: result.venueLng,
           isCancelled: result.isCancelled,
           date: result.date,
+          time: result.time,
         };
         patchState({
           selectedEvent: result,
