@@ -1,0 +1,34 @@
+<mdb-card>
+  <mdb-card-header>Recent Activity</mdb-card-header>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let act of activity">
+      <div class="row align-items-top">
+
+        <div class="col-2">
+          <img src="{{ act.photoUrl }}" alt="" class="mr-3 rounded-circle img35" />
+        </div>
+
+        <div class="col">
+         <span><mdb-badge color="indigo">Event</mdb-badge>&nbsp;
+          <a [routerLink]="['/settings/user', act.userId]">{{ act.userUserName | titlecase }}</a> is hosting <a [routerLink]="[ '/events', act.eventId]">{{ act.eventTitle }}</a></span>
+          <div>
+            <div class="timeAgo mt-2">{{ act.created | amFromUtc | amTimeAgo }}</div>
+          </div>
+        </div>
+
+      </div>
+    </li>
+
+    <!-- <ng-container *ngFor="let eventUser of eventUsers">
+        <a [routerLink]="['/settings/user', eventUser.userId]">
+          <li class="list-group-item">
+            <img
+              src="{{ eventUser.photoUrl }}"
+              alt=""
+              class="mr-2 mt-2 rounded-circle img35"
+            />&nbsp;&nbsp;{{ eventUser.userName | titlecase }}
+          </li>
+          </a>
+        </ng-container> -->
+  </ul>
+</mdb-card>

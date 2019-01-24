@@ -28,7 +28,7 @@ namespace Backend.Controllers
       _userManager = userManager;
       _mapper = mapper;
     }
-    
+
     // GET: api/Events
     [HttpGet]
     public async Task<IActionResult> GetEvents()
@@ -44,7 +44,7 @@ namespace Backend.Controllers
 
       return Ok(eventsForReturn);
     }
-    
+
     // GET: api/Events
     [HttpGet("{id}", Name = "GetEvent")]
     public async Task<IActionResult> GetEvent(Guid id)
@@ -67,7 +67,7 @@ namespace Backend.Controllers
     {
       var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
       var user = await _userManager.FindByIdAsync(currentUserId);
-      
+
       var _event = _mapper.Map<Event>(eventForCreationDto);
 
       await _context.Events.AddAsync(_event);
@@ -80,15 +80,24 @@ namespace Backend.Controllers
       };
 
       await _context.AddAsync(eventUser);
+
+      var newActivity = new Activity {
+        User = user,
+        Event = _event,
+        Type = "NewEvent"
+      };
+
+      await _context.AddAsync(newActivity);
+
       var result = await _context.SaveChangesAsync();
 
-      if (result != 2) return BadRequest("Error creating Event");
+      if (result != 3) return BadRequest("Error creating Event");
 
       var eventForReturn = _mapper.Map<EventForReturnDto>(_event);
 
       return CreatedAtAction("GetEvent", new {id = _event.Id}, eventForReturn);
     }
-    
+
     [Authorize(Policy = "Authenticated")]
     [HttpPatch]
     public async Task<IActionResult> UpdateEvent(EventForUpdateDto eventForUpdateDto)
@@ -101,7 +110,7 @@ namespace Backend.Controllers
       var eventHost = _event.EventUsers.FirstOrDefault(eu => eu.IsHost);
 
       if (eventHost != null && currentUserId != eventHost.UserId) return BadRequest();
-      
+
       _mapper.Map(eventForUpdateDto, _event);
 
       var result = await _context.SaveChangesAsync();
@@ -118,21 +127,21 @@ namespace Backend.Controllers
       var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
       var user = await _userManager.FindByIdAsync(currentUserId);
       var _event = await _context.Events.FindAsync(eventId);
-      
+
       var eventUser = new EventUser
       {
         Event = _event,
         User = user,
         IsHost = false
       };
-      
+
       await _context.AddAsync(eventUser);
       var result = await _context.SaveChangesAsync();
-      
+
       if (result == 0) return BadRequest("Error joining Event");
       return Ok();
     }
-    
+
     [Authorize(Policy = "Authenticated")]
     [HttpPost("{eventId}/cancel")]
     public async Task<IActionResult> CancelMyPlace(Guid eventId)
@@ -144,10 +153,10 @@ namespace Backend.Controllers
       var eventUser = await _context.EventUsers
         .Where(e => e.EventId == eventId)
         .FirstOrDefaultAsync(u => u.User == user);
-      
+
       _context.Remove(eventUser);
       var result = await _context.SaveChangesAsync();
-      
+
       if (result == 0) return BadRequest("Error joining Event");
       return Ok();
     }

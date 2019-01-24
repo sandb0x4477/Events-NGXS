@@ -1,9 +1,10 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 
 import { Event, EventUser } from '../../models/event.model';
-import { LoadEvents, GetEventDetail, CreateEvent, JoinEvent, CancelMyPlace, UpdateEvent } from './event.actions';
+import { LoadEvents, GetEventDetail, CreateEvent, JoinEvent, CancelMyPlace, UpdateEvent, LoadActivity } from './event.actions';
 import { EventService } from '../services/event.service';
 import { tap } from 'rxjs/operators';
+import { Activity } from '../../models/activity.model';
 
 export interface EventStateModel {
   loading: boolean;
@@ -11,6 +12,7 @@ export interface EventStateModel {
   selectedEvent: Event;
   eventForm: {};
   manageForm: {};
+  activity: Activity[];
 }
 
 @State<EventStateModel>({
@@ -19,6 +21,7 @@ export interface EventStateModel {
     loading: false,
     events: [],
     selectedEvent: undefined,
+    activity: [],
     eventForm: {
       model: undefined,
       dirty: false,
@@ -47,6 +50,11 @@ export class EventState {
   }
 
   @Selector()
+  public static getActivity(state: EventStateModel) {
+    return state.activity;
+  }
+
+  @Selector()
   public static getEvents(state: EventStateModel) {
     return state.events;
   }
@@ -54,6 +62,19 @@ export class EventState {
   @Selector()
   public static selectedEvent(state: EventStateModel): Event {
     return state.selectedEvent;
+  }
+
+  @Action(LoadActivity)
+  public loadActivity({ setState, patchState }: StateContext<EventStateModel>) {
+    patchState({ loading: true });
+    return this.eventService.loadActivity().pipe(
+      tap((result: Activity[]) => {
+        patchState({
+          activity: result,
+          loading: false,
+        });
+      }),
+    );
   }
 
   @Action(LoadEvents)

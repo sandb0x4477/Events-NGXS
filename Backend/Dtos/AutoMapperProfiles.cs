@@ -14,8 +14,7 @@ namespace Backend.Dtos
       //
       //      CreateMap<Photo, PhotoForReturnDto>();
 
-
-//    Photos
+      //    Photos
       CreateMap<PhotoForCreationDto, Photo>();
       CreateMap<Photo, PhotoForReturnDto>();
 
@@ -30,21 +29,25 @@ namespace Backend.Dtos
         .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
         .ForMember(dest => dest.PhotoUrl,
           opt => opt.MapFrom(src => src.User.Photos.FirstOrDefault(up => up.IsMain).PhotoUrl));
-      //
-      //      CreateMap<Event, EventForReturnDto>()
-      //        .ForMember(dest => dest.HostPhotoUrl, opt =>
-      //        opt.MapFrom(src => src.Host.Photos.FirstOrDefault(hp => hp.IsMain).PhotoUrl))
-      ////        .ForMember(dest => dest.EventUsers, opt => opt.Condition(src => src.HostId != src.EventUsers. ))
-      //        ;
-      //
-      //      CreateMap<EventUser, _EventUser>()
-      //        .ForMember(dest => dest.UserId, opt => { opt.MapFrom(src => src.UserId); })
-      //        .ForMember(dest => dest.UserName, opt =>
-      //          opt.MapFrom(src => src.User.UserName))
-      //        .ForMember(dest => dest.PhotoUrl,
-      //          opt => opt.MapFrom(src => src.User.Photos.FirstOrDefault(up => up.IsMain).PhotoUrl))
-      ////        .ForAllMembers(opt => opt.PreCondition(src => src.User.Id != src.Event.HostId))
-      //        ;
+
+      CreateMap<Activity, ActivityForReturnDto>()
+        .ForMember(dest => dest.PhotoUrl,
+          opt => opt.MapFrom(src => src.User.Photos.FirstOrDefault(up => up.IsMain).PhotoUrl));
     }
   }
 }
+//
+//      CreateMap<Event, EventForReturnDto>()
+//        .ForMember(dest => dest.HostPhotoUrl, opt =>
+//        opt.MapFrom(src => src.Host.Photos.FirstOrDefault(hp => hp.IsMain).PhotoUrl))
+////        .ForMember(dest => dest.EventUsers, opt => opt.Condition(src => src.HostId != src.EventUsers. ))
+//        ;
+//
+//      CreateMap<EventUser, _EventUser>()
+//        .ForMember(dest => dest.UserId, opt => { opt.MapFrom(src => src.UserId); })
+//        .ForMember(dest => dest.UserName, opt =>
+//          opt.MapFrom(src => src.User.UserName))
+//        .ForMember(dest => dest.PhotoUrl,
+//          opt => opt.MapFrom(src => src.User.Photos.FirstOrDefault(up => up.IsMain).PhotoUrl))
+////        .ForAllMembers(opt => opt.PreCondition(src => src.User.Id != src.Event.HostId))
+//        ;

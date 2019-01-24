@@ -11,6 +11,7 @@ namespace Backend.Data
     public DbSet<Event> Events { get; set; }
     public DbSet<Photo> Photos { get; set; }
     public DbSet<EventUser> EventUsers { get; set; }
+    public DbSet<Activity> Activity { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder builder)

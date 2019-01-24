@@ -8,6 +8,7 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { TimepickerModule } from 'ngx-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AgmCoreModule } from '@agm/core';
+import { MomentModule } from 'ngx-moment';
 
 import { CacheInterceptor } from '../interceptors/cache.interceptor';
 import { States } from './state/module.state';
@@ -24,6 +25,7 @@ import { EventFormComponent } from './components/event-form/event-form.component
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { EventManageComponent } from './components/event-manage/event-manage.component';
 import { EventManagePageComponent } from './containers/event-manage-page/event-manage-page.component';
+import { EventActivityComponent } from './components/event-activity/event-activity.component';
 
 export const COMPONENTS = [
   EventDashboardComponent,
@@ -34,7 +36,8 @@ export const COMPONENTS = [
   EventFormComponent,
   SearchSpinnerComponent,
   EventManagePageComponent,
-  EventManageComponent
+  EventManageComponent,
+  EventActivityComponent
 ];
 
 @NgModule({
@@ -54,6 +57,7 @@ export const COMPONENTS = [
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     NgxsModule.forFeature(States),
+    MomentModule
   ],
   declarations: COMPONENTS,
   providers: [

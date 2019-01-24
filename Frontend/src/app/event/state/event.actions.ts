@@ -1,3 +1,8 @@
+export class LoadActivity {
+  static readonly type = '[EVENT] Load Activity';
+  constructor() {}
+}
+
 export class LoadEvents {
   static readonly type = '[EVENT] Load Events';
   constructor() {}

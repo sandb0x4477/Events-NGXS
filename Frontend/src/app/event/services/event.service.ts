@@ -5,14 +5,20 @@ import { mergeMap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { Event } from '../../models/event.model';
+import { Activity } from '../../models/activity.model';
 
 @Injectable()
 export class EventService {
   private apiURL: string = environment.apiURL + 'events/';
+  private activityURL: string = environment.apiURL + 'activity/';
 
   constructor(private http: HttpClient) {}
 
   // ? LOAD EVENTS
+  loadActivity(): Observable<Activity[]> {
+    return this.http.get<Activity[]>(this.activityURL);
+  }
+
   loadEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(this.apiURL);
   }
