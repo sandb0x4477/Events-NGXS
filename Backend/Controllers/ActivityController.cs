@@ -34,6 +34,7 @@ namespace Backend.Controllers
         .ThenInclude(p => p.Photos)
         .Include(e => e.Event)
         .OrderByDescending(a => a.Created)
+        .Take(6)
         .ToListAsync();
 
       var activityForReturn = _mapper.Map<IEnumerable<ActivityForReturnDto>>(activity);

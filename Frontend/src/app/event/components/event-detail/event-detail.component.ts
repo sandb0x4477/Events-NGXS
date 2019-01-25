@@ -32,6 +32,11 @@ export class EventDetailComponent implements OnInit {
   }
 
   joinThisEvent(eventId: string) {
+    const user = JSON.parse(localStorage.getItem('auth.currentUser'));
+    if (!user.token) {
+      window.alert('Please login or register first');
+      return;
+    }
     this.joinEvent.emit(eventId);
   }
 

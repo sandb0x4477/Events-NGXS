@@ -1,0 +1,52 @@
+<mdb-card>
+  <mdb-card-header>Chat about this Event</mdb-card-header>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let chat of chats">
+
+        <img src="{{ chat.photoUrl }}" alt="" class="mr-3 rounded-circle img35  d-inline" />
+        <h5 class="d-inline"><a [routerLink]="['/settings/user', chat.userId]">
+          {{ chat.userUserName | titlecase }}</a></h5>
+        <p class="timeAgo d-inline float-right">{{ chat.created | amFromUtc | amTimeAgo }}</p>
+
+      <div class="mt-3">
+        <p>{{ chat.message }}</p>
+      </div>
+    </li>
+  </ul>
+  <mdb-card-body>
+    <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+        <div class="form-row">
+            <!-- Grid column -->
+            <div class="col">
+              <!-- Material input -->
+              <div class="md-form form-group">
+                  <input
+                    mdbInputDirective
+                    type="text"
+                    class="form-control"
+                    id="inputEmail4MD"
+                    formControlName="message"
+                    [validateSuccess]="false"
+                    data-error="Min. lenght 3 characters"
+                  />
+                </div>
+            </div>
+          </div>
+          <!-- Grid column -->
+
+          <button [disabled]="!messageForm.valid" type="submit" class="btn btn-primary btn-sm">Reply</button>
+    </form>
+  </mdb-card-body>
+</mdb-card>
+
+<!-- <div class="row">
+    <div class="col-2">
+      <img src="{{ chat.photoUrl }}" alt="" class="mr-1 rounded-circle img35" />
+    </div>
+
+    <div class="col">
+      <h5>{{ chat.userUserName | titlecase }}</h5>
+      <p>{{ chat.message }}</p>
+    </div>
+    <p class="mr-2 timeAgo">{{ chat.created | amFromUtc | amTimeAgo }}</p>
+  </div> -->

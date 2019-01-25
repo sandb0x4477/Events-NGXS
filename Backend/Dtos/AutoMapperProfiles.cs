@@ -33,6 +33,13 @@ namespace Backend.Dtos
       CreateMap<Activity, ActivityForReturnDto>()
         .ForMember(dest => dest.PhotoUrl,
           opt => opt.MapFrom(src => src.User.Photos.FirstOrDefault(up => up.IsMain).PhotoUrl));
+      CreateMap<Chat, ChatForReturnDto>()
+        .ForMember(dest => dest.PhotoUrl,
+          opt => opt.MapFrom(src => src.User.Photos.FirstOrDefault(up => up.IsMain).PhotoUrl));
+      CreateMap<Chat, MessageForReturnDto>()
+        .ForMember(dest => dest.PhotoUrl,
+          opt => opt.MapFrom(src => src.User.Photos.FirstOrDefault(up => up.IsMain).PhotoUrl));
+      CreateMap<MessageForCreationDto, Chat>();
     }
   }
 }

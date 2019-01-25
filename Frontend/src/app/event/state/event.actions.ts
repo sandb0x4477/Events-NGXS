@@ -1,3 +1,13 @@
+export class CreateChatMessage {
+  static readonly type = '[EVENT] Create Message';
+  constructor(public payload: any) {}
+}
+
+export class LoadChat {
+  static readonly type = '[EVENT] Load Chat';
+  constructor(public payload: string) {}
+}
+
 export class LoadActivity {
   static readonly type = '[EVENT] Load Activity';
   constructor() {}

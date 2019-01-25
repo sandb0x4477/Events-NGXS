@@ -26,6 +26,8 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { EventManageComponent } from './components/event-manage/event-manage.component';
 import { EventManagePageComponent } from './containers/event-manage-page/event-manage-page.component';
 import { EventActivityComponent } from './components/event-activity/event-activity.component';
+import { EventChatComponent } from './components/event-chat/event-chat.component';
+import { EventUsersComponent } from './components/event-users/event-users.component';
 
 export const COMPONENTS = [
   EventDashboardComponent,
@@ -37,7 +39,9 @@ export const COMPONENTS = [
   SearchSpinnerComponent,
   EventManagePageComponent,
   EventManageComponent,
-  EventActivityComponent
+  EventActivityComponent,
+  EventChatComponent,
+  EventUsersComponent
 ];
 
 @NgModule({

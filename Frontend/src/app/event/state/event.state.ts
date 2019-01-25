@@ -1,10 +1,12 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 
 import { Event, EventUser } from '../../models/event.model';
-import { LoadEvents, GetEventDetail, CreateEvent, JoinEvent, CancelMyPlace, UpdateEvent, LoadActivity } from './event.actions';
+// tslint:disable-next-line:max-line-length
+import { LoadEvents, GetEventDetail, CreateEvent, JoinEvent, CancelMyPlace, UpdateEvent, LoadActivity, LoadChat, CreateChatMessage } from './event.actions';
 import { EventService } from '../services/event.service';
 import { tap } from 'rxjs/operators';
 import { Activity } from '../../models/activity.model';
+import { Chat } from '../../models/chat.model';
 
 export interface EventStateModel {
   loading: boolean;
@@ -13,6 +15,7 @@ export interface EventStateModel {
   eventForm: {};
   manageForm: {};
   activity: Activity[];
+  chat: Chat[];
 }
 
 @State<EventStateModel>({
@@ -22,6 +25,7 @@ export interface EventStateModel {
     events: [],
     selectedEvent: undefined,
     activity: [],
+    chat: [],
     eventForm: {
       model: undefined,
       dirty: false,
@@ -60,6 +64,11 @@ export class EventState {
   }
 
   @Selector()
+  public static getChat(state: EventStateModel) {
+    return state.chat;
+  }
+
+  @Selector()
   public static selectedEvent(state: EventStateModel): Event {
     return state.selectedEvent;
   }
@@ -85,6 +94,22 @@ export class EventState {
         patchState({
           events: result,
           loading: false,
+        });
+      }),
+    );
+  }
+
+  @Action(LoadChat)
+  public loadChat(
+    { setState, patchState }: StateContext<EventStateModel>,
+    { payload }: LoadChat,
+  ) {
+    patchState({ loading: true, chat: [] });
+    return this.eventService.loadChat(payload).pipe(
+      tap((result: Chat[]) => {
+        patchState({
+          loading: false,
+          chat: result
         });
       }),
     );
@@ -133,6 +158,23 @@ export class EventState {
         patchState({
           loading: false,
           eventForm: { model: undefined}
+        });
+      }),
+    );
+  }
+
+  @Action(CreateChatMessage)
+  public createChatMessage(
+    { setState, patchState, getState }: StateContext<EventStateModel>,
+    { payload }: CreateChatMessage,
+  ) {
+    patchState({ loading: true });
+    return this.eventService.createMessage(payload).pipe(
+      tap((result: Chat) => {
+        const state = getState();
+        patchState({
+          loading: false,
+          chat: [...state.chat, result]
         });
       }),
     );
