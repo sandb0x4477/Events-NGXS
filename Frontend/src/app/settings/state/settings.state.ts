@@ -3,6 +3,7 @@ import { tap } from 'rxjs/operators';
 
 import { SettingsService } from '../services/settings.service';
 import { UserInfo } from '../../models/user-info.model';
+import { Photo } from '../../models/photo.model';
 import {
   FetchUserInfo,
   UpdateUserInfo,
@@ -10,7 +11,6 @@ import {
   AddUserPhoto,
   SetMainPhoto,
 } from './settings.actions';
-import { Photo } from '../../models/photo.model';
 
 export interface SettingsStateModel {
   loading: boolean;

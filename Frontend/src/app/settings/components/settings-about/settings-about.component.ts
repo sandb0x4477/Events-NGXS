@@ -30,10 +30,8 @@ export class SettingsAboutComponent implements OnInit {
 
   updateProfile() {
     // console.log(this.aboutForm.value);
-    const user = JSON.parse(localStorage.getItem('user'));
+    // const user = JSON.parse(localStorage.getItem('user'));
     this.userInfo = Object.assign({}, this.aboutForm.getRawValue());
-    this.store.dispatch(new UpdateUserInfo(this.userInfo)).subscribe(() => {
-      console.log('Success');
-    });
+    this.store.dispatch(new UpdateUserInfo(this.userInfo));
   }
 }

@@ -51,9 +51,7 @@ export class SettingsPhotosComponent implements OnInit {
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
         const res: Photo = JSON.parse(response);
-        // console.log(response);
         const photo = Object.assign({}, res) as Photo;
-        // console.log('photo:', photo);
         this.store.dispatch(new AddUserPhoto(photo));
         // this.store.updatePhotos(photo);
         // if (photo.isMain) {
@@ -65,12 +63,11 @@ export class SettingsPhotosComponent implements OnInit {
     };
   }
 
-  setMainPhoto(photo) {
+  setMainPhoto(photo: Photo) {
     this.store.dispatch(new SetMainPhoto(photo.id));
   }
 
   deletePhoto(photo: Photo) {
-    console.log('photo:', photo);
     this.store.dispatch(new DeleteUserPhoto(photo.id));
   }
 }

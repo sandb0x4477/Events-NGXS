@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -128,18 +129,32 @@ namespace Backend
         });
       }
 
-      app.UseCors(x =>
-        x.WithOrigins("http://localhost:4200")
-          .AllowAnyHeader()
-          .AllowAnyMethod());
+      // app.UseCors(x =>
+      //   x.WithOrigins("http://localhost:4200")
+      //     .AllowAnyHeader()
+      //     .AllowAnyMethod());
 
       // Register the Swagger generator and the Swagger UI middlewares
       app.UseSwagger();
       app.UseSwaggerUi3();
 
+      app.UsePathBase("/ngevents");
+      app.UseDefaultFiles();
+      app.UseStaticFiles();
+
       app.UseAuthentication();
 
-      app.UseMvc();
+      app.UseForwardedHeaders (new ForwardedHeadersOptions {
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+      });
+
+      app.UseMvc(routes =>
+      {
+        routes.MapSpaFallbackRoute(
+          name: "spa-fallback",
+          defaults : new { controller = "Fallback", action = "index" }
+        );
+      });
 //      CreateUserRoles(services).Wait();
     }
 

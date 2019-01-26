@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
-  [Route("api/[controller]")]
+  [Route("apievents/[controller]")]
   [ApiController]
   public class EventsController : ControllerBase
   {

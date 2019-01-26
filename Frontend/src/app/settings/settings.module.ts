@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { ButtonsModule, InputsModule, WavesModule, CardsFreeModule  } from 'angular-bootstrap-md';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -45,8 +45,11 @@ export const COMPONENTS = [
     NgxsModule.forFeature(States),
     SettingsRoutingModule,
     GooglePlaceModule,
-    MDBBootstrapModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ButtonsModule,
+    InputsModule.forRoot(),
+    WavesModule.forRoot(),
+    CardsFreeModule
   ],
   providers: [
     SettingsService,

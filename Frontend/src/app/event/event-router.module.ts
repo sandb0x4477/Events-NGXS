@@ -5,12 +5,13 @@ import { EventDashboardComponent } from './containers/event-dashboard/event-dash
 import { EventDetailPageComponent } from './containers/event-detail-page/event-detail-page.component';
 import { EventCreatePageComponent } from './containers/event-create-page/event-create-page.component';
 import { EventManagePageComponent } from './containers/event-manage-page/event-manage-page.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '', component: EventDashboardComponent,
   },
-  { path: 'create', pathMatch: 'full', component: EventCreatePageComponent },
+  { path: 'create', pathMatch: 'full', component: EventCreatePageComponent, canActivate: [AuthGuard], },
   { path: ':eventId', component: EventDetailPageComponent },
   { path: ':eventId/manage', component: EventManagePageComponent },
 ];

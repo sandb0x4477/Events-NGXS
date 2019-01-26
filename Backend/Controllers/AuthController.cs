@@ -18,7 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace Backend.Controllers
 {
   [AllowAnonymous]
-  [Route("api/[controller]")]
+  [Route("apievents/[controller]")]
   [ApiController]
   [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
   public class AuthController : ControllerBase
@@ -54,7 +54,7 @@ namespace Backend.Controllers
       var mainPhotoUrl = mainPhoto == null ? "assets/user.png" : mainPhoto.PhotoUrl;
 
       var token = GenerateJwtToken(user).Result;
-      
+
       var userToReturn = new {id = user.Id, username = user.UserName, mainPhotoUrl, token};
 
       return Ok(userToReturn);

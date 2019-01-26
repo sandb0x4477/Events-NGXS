@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { ButtonsModule, InputsModule, WavesModule, NavbarModule, ModalModule, DropdownModule } from 'angular-bootstrap-md';
 
 import { NotFoundPageComponent } from './containers/not-found-page/not-found-page.component';
 import { AppComponent } from './containers/app/app.component';
@@ -25,7 +25,12 @@ export const COMPONENTS = [
     RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot(),
+    ButtonsModule,
+    InputsModule.forRoot(),
+    WavesModule.forRoot(),
+    ModalModule.forRoot(),
+    DropdownModule.forRoot(),
+    NavbarModule
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS,

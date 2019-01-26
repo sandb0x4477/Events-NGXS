@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Backend.Controllers
 {
-  [Route("api/[controller]")]
+  [Route("apievents/[controller]")]
   [ApiController]
   public class UsersController : ControllerBase
   {
@@ -42,21 +42,21 @@ namespace Backend.Controllers
       {
         return NotFound();
       }
-      
+
       var userToReturn = _mapper.Map<UserForReturnDto>(user);
 
       return Ok(userToReturn);
     }
-    
+
     [Authorize(Policy = "Authenticated")]
     [HttpPatch("{id}")]
     public async Task<IActionResult> UpdateUser(string id, UserForUpdateDto userForUpdateDto)
     {
       var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-      
+
       if (id != currentUserId)
         return Unauthorized();
-      
+
 //      var userForUpdate = _mapper.Map<User>(userForUpdateDto);
 //
 //      userForUpdate.Id = currentUserId;

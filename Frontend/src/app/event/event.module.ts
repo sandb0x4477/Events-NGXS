@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MDBBootstrapModule, ButtonsModule, InputsModule, WavesModule, CardsFreeModule, BadgeModule } from 'angular-bootstrap-md';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { TimepickerModule } from 'ngx-bootstrap';
@@ -54,14 +54,18 @@ export const COMPONENTS = [
     GooglePlaceModule,
     NgxsFormPluginModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAmuJbpsk9Ry_UgQMoyn-ZMXGXuVKYa5kU',
+      apiKey: '<>',
       libraries: ['places']
     }),
-    MDBBootstrapModule.forRoot(),
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     NgxsModule.forFeature(States),
-    MomentModule
+    MomentModule,
+    ButtonsModule,
+    InputsModule.forRoot(),
+    WavesModule.forRoot(),
+    CardsFreeModule,
+    BadgeModule
   ],
   declarations: COMPONENTS,
   providers: [

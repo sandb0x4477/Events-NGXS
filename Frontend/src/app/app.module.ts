@@ -34,15 +34,10 @@ import { CoreModule } from './core/core.module';
     NgxsStoragePluginModule.forRoot({
       key: [
         'auth.currentUser',
-        // 'settings.userInfo',
-        // 'events.events',
-        // 'events.selectedEvent',
       ],
     }),
     NgxsRouterPluginModule.forRoot(),
-    NgxsReduxDevtoolsPluginModule.forRoot({
-      disabled: environment.production,
-    }),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
     CoreModule.forRoot(),
   ],
   providers: [

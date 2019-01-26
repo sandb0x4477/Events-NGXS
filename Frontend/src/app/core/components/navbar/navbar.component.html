@@ -12,9 +12,9 @@
         <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/events']">Events</a>
       </li>
       <ng-container *ngIf="(currentUser$ | async).token">
-        <li class="nav-item" id="navbaritem2">
+        <!-- <li class="nav-item" id="navbaritem2">
           <a class="nav-link waves-light" mdbWavesEffect>People</a>
-        </li>
+        </li> -->
         <li class="nav-item" id="navbaritem3">
           <button type="button" size="sm" mdbBtn color="success" mdbWavesEffect [routerLink]="[ '/events/create']">
             Create Event

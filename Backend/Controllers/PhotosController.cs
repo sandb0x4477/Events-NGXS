@@ -18,7 +18,7 @@ using Microsoft.Extensions.Options;
 
 namespace Backend.Controllers
 {
-  [Route("api/[controller]")]
+  [Route("apievents/[controller]")]
   [ApiController]
   public class PhotosController : ControllerBase
   {
@@ -155,7 +155,7 @@ namespace Backend.Controllers
       if (!user.Photos.Any(u => u.IsMain)) photo.IsMain = true;
 
       photo.UserId = currentUserId;
-      
+
       _context.Photos.Add(photo);
 
       var result = await _context.SaveChangesAsync();
@@ -182,7 +182,7 @@ namespace Backend.Controllers
       if (photo.UserId != currentUserId) return Unauthorized();
 
       if (photo.IsMain) return BadRequest("Can not delete main photo");
-      
+
       if (photo.PublicId != null)
       {
         var deleteParams = new DeletionParams(photo.PublicId);
@@ -193,7 +193,7 @@ namespace Backend.Controllers
       }
 
       if (photo.PublicId == null) _context.Photos.Remove(photo);
-      
+
       var result = await _context.SaveChangesAsync();
       if (result != 0) return Ok();
 

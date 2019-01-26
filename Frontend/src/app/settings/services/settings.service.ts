@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 
 import { environment } from '../../../environments/environment';
 import { UserInfo } from '../../models/user-info.model';
-// import { SettingsStore } from '../store/settings.store';
-// import { BasicInfo } from '../models/basic-info.model';
 
 @Injectable()
 export class SettingsService {
