@@ -129,24 +129,24 @@ namespace Backend
         });
       }
 
-      // app.UseCors(x =>
-      //   x.WithOrigins("http://localhost:4200")
-      //     .AllowAnyHeader()
-      //     .AllowAnyMethod());
+      app.UseCors(x =>
+        x.WithOrigins("http://localhost:4200")
+          .AllowAnyHeader()
+          .AllowAnyMethod());
 
       // Register the Swagger generator and the Swagger UI middlewares
       app.UseSwagger();
       app.UseSwaggerUi3();
 
-      app.UsePathBase("/ngevents");
-      app.UseDefaultFiles();
-      app.UseStaticFiles();
+      // app.UsePathBase("/ngevents");
+      // app.UseDefaultFiles();
+      // app.UseStaticFiles();
 
       app.UseAuthentication();
 
-      app.UseForwardedHeaders (new ForwardedHeadersOptions {
-        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-      });
+      // app.UseForwardedHeaders (new ForwardedHeadersOptions {
+      //   ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+      // });
 
       app.UseMvc(routes =>
       {

@@ -54,7 +54,7 @@ export const COMPONENTS = [
     GooglePlaceModule,
     NgxsFormPluginModule,
     AgmCoreModule.forRoot({
-      apiKey: '<>',
+      apiKey: 'AIzaSyB7V7dyCxRon1cB_uU--ygfvCtzwqHiGNo',
       libraries: ['places']
     }),
     BsDatepickerModule.forRoot(),
