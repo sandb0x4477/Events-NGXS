@@ -33,7 +33,7 @@
     "@ngxs/store": "^3.4.3",
     "angular-bootstrap-md": "7.5.3",
     "bootstrap": "^4.3.1",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.6.9",
     "font-awesome": "^4.7.0",
